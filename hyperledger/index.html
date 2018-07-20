@@ -1,0 +1,78 @@
+<html>
+        <head>
+                <title>Bootstrap Example</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                
+              </head>
+<body>
+        <div class="jumbotron text-center">
+        <h1>Supply Chain Demo</h1>
+        </div>
+    <div class="container">
+        <br/>
+        
+        <div id="product" class="col-sm-8">
+        </div>
+        <hr>
+    <form>
+  <div class="form-group">
+      <h3>Update Location:</h3>
+    <label >Facility Name:</label>
+    <input type="text" class="form-control" id="fname" placeholder="">
+    
+  </div>
+  <div class="form-group">
+    <label >Facility Address:</label>
+    <input type="text" class="form-control" id="faddress" placeholder="">
+  </div>
+  <div class="form-group">
+        <label >Facility Zip Code:</label>
+        <input type="text" class="form-control" id="fzipcode" placeholder="">
+      </div>
+  
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+<hr>
+<div class="col-sm-8">
+    <h3>Product Location History</h3><br>
+    <div id="history"></div>
+</div>
+<script>
+        var facility = {
+            "$class": "org.ahold.Facility",
+            "facilityId": "uncc",
+            "facilityName": "UNCC",
+            "facilityAddress": "Charlotte",
+            "facilityZip": "28262"
+        };
+
+        /*$.post('http://localhost:3000/api/org.ahold.Facility', facility, function(response){
+            console.log(response);
+        });*/
+        $.get('http://localhost:3000/api/org.ahold.Facility' , function(response){
+            console.log(response)
+        });
+        $.get('http://localhost:3000/api/org.ahold.Product', function(response) {
+            $('#product').append(`
+              <h3>${response[0].name}</h3>
+              <h3>${response[0].description}</h3>
+            `) 
+        });
+    </script>
+</div>
+</body>
+</html>
+
+
+<div>
+        <h4>Facility Name</h4><br>
+        <h4>Facility Address</h4><br>
+        <h4>Facility Zipcode</h4><br>
+        <h4>Facility Date</h4><br>
+        <h4>Facility Time</h4><br>    
+    </div>
